@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>江苏宇联半导体有限公司 - 智慧触控与LED显示技术创新企业</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #165DFF;
+            --secondary: #0FC6C2;
+            --dark: #1D2129;
+            --light: #F7F8FA;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #0a47c4 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://picsum.photos/id/1/1920/1080') no-repeat center center/cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        .section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .nav-scrolled {
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .timeline {
+            position: relative;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: white;
+            border: 4px solid var(--primary);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .timeline-left {
+            left: 0;
+        }
+        
+        .timeline-right {
+            left: 50%;
+        }
+        
+        .timeline-right::after {
+            left: -10px;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 21px;
+            }
+            
+            .timeline-right {
+                left: 0%;
+            }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        .highlight {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0a47c4;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav id="mainNav" class="fixed w-full z-50 transition-all duration-300 py-4 bg-white/90 backdrop-blur-sm shadow-md">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="flex justify-between items-center">
+                <a href="#" class="flex items-center">
+                  <span class="text-2xl font-bold text-[#2C3E50]">UNIOA宇联</span> <!-- 自定义深蓝色 -->
+                </a>
+                
+                <!-- 桌面导航 -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="text-gray-800 hover:text-primary transition-colors">关于我们</a>
+                    <a href="#history" class="text-gray-800 hover:text-primary transition-colors">发展历程</a>
+                    <a href="#business" class="text-gray-800 hover:text-primary transition-colors">业务板块</a>
+                    <a href="#products" class="text-gray-800 hover:text-primary transition-colors">产品中心</a>
+                    <a href="#philosophy" class="text-gray-800 hover:text-primary transition-colors">企业理念</a>
+                    <a href="#social" class="text-gray-800 hover:text-primary transition-colors">社会责任</a>
+                </div>
+                
+                <!-- 移动端菜单按钮 -->
+                <button id="menuBtn" class="md:hidden text-gray-800 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 移动端导航菜单 -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white absolute w-full shadow-lg">
+            <div class="container mx-auto px-4 py-3 space-y-3">
+                <a href="#about" class="block text-gray-800 hover:text-primary transition-colors">关于我们</a>
+                <a href="#history" class="block text-gray-800 hover:text-primary transition-colors">发展历程</a>
+                <a href="#business" class="block text-gray-800 hover:text-primary transition-colors">业务板块</a>
+                <a href="#products" class="block text-gray-800 hover:text-primary transition-colors">产品中心</a>
+                <a href="#philosophy" class="block text-gray-800 hover:text-primary transition-colors">企业理念</a>
+                <a href="#social" class="block text-gray-800 hover:text-primary transition-colors">社会责任</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <header class="hero min-h-screen flex items-center justify-center relative z-10 pt-20">
+        <div class="container mx-auto px-4 md:px-6 text-center">
+            <h1 class="text-[clamp(2.5rem,8vw,5rem)] font-bold mb-6 animate-float">
+                全球智慧触控屏&LED显示屏领域<br>技术创新企业
+            </h1>
+            <p class="text-[clamp(1.25rem,3vw,1.75rem)] mb-8 max-w-3xl mx-auto">
+                UNIOA-智慧触控屏&LED显示屏产品与技术解决方案供应商<br>
+                <span class="text-4xl">宇显示 联万物</span>
+            </p>
+            <a href="#about" class="btn-primary text-white font-medium py-3 px-8 rounded-full inline-block">
+                了解更多 <i class="fas fa-arrow-down ml-2"></i>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- 关于我们 -->
+        <section id="about" class="section py-20 bg-white">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4">关于我们</h2>
+                    <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 md:order-1">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-800">企业概括</h3>
+                        <p class="text-gray-700 mb-6 leading-relaxed">
+                            江苏宇联半导体有限公司，成立于2021年3月，位于江苏省扬州市高邮高新技术开发区，注册资本3000万元，厂房面积达2万平方米无尘净化车间。
+                        </p>
+                        
+                        <h3 class="text-2xl font-bold mb-6 text-gray-800 mt-12">服务承诺</h3>
+                        <ul class="space-y-4 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-headset text-blue-500 mt-1 mr-3"></i>
+                                <span>24小时客户在线咨询与技术服务</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-shield-alt text-blue-500 mt-1 mr-3"></i>
+                                <span>产品提供1年的质量保修服务，终生维护</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-graduation-cap text-blue-500 mt-1 mr-3"></i>
+                                <span>免费提供产品安装培训，定期回访</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="order-1 md:order-2 relative">
+                        <img src="https://picsum.photos/id/20/800/600" alt="宇联半导体厂房" class="w-full h-auto rounded-lg shadow-xl">
+                        <div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-lg shadow-lg max-w-xs">
+                            <h4 class="font-bold text-lg mb-2">无尘净化车间</h4>
+                            <p class="text-gray-600">2万平方米专业无尘环境，确保产品生产精度与质量</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 发展历程 -->
+        <section id="history" class="section py-20 bg-gray-50">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4">发展历程</h2>
+                    <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item timeline-left">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-xl font-bold text-blue-600 mb-2">2021年3月</h3>
+                            <p class="text-gray-700">江苏宇联半导体有限公司正式成立，落户江苏省扬州市高邮高新技术开发区</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-right">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-xl font-bold text-blue-600 mb-2">2021年-2022年</h3>
+                            <p class="text-gray-700">建成2万平方米无尘净化车间，引进国际先进自动化生产线</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-left">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-xl font-bold text-blue-600 mb-2">2023年</h3>
+                            <p class="text-gray-700">新能源触控事业部与LED显示屏事业部正式运营，形成完整业务体系</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-right">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-xl font-bold text-blue-600 mb-2">2024年</h3>
+                            <p class="text-gray-700">与中国科学院重庆量子研究所达成战略合作，开展光电芯片材料研发</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-left">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-xl font-bold text-blue-600 mb-2">未来规划</h3>
+                            <p class="text-gray-700">致力于成为智慧城市与人机交互应用的建设主力军，5年内实现碳中和目标</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 业务板块 -->
+        <section id="business" class="section py-20 bg-white">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4">三大业务板块</h2>
+                    <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="card bg-gray-50 p-8 rounded-xl">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-microchip text-2xl text-blue-500"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-center mb-4">光电新材料研发与应用</h3>
+                        <p class="text-gray-700 text-center">
+                            专注于光电芯片材料研发，与中国科学院重庆量子研究所达成战略合作，推动光电新材料技术突破。
+                        </p>
+                    </div>
+                    
+                    <div class="card bg-gray-50 p-8 rounded-xl">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-tablet-alt text-2xl text-blue-500"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-center mb-4">触控产品生态线</h3>
+                        <p class="text-gray-700 text-center">
+                            7'～100"全尺寸触控产品覆盖，包括电容屏、触显一体模组、电磁电容一体化等五大系列产品。
+                        </p>
+                    </div>
+                    
+                    <div class="card bg-gray-50 p-8 rounded-xl">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-video text-2xl text-blue-500"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-center mb-4">LED显示屏</h3>
+                        <p class="text-gray-700 text-center">
+                            涵盖室内外全彩显示屏、小间距显示屏、智慧灯杆屏等，为各行业提供显示解决方案。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 产品中心 -->
+        <section id="products" class="section py-20 bg-gray-50">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4">产品中心</h2>
+                    <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+                </div>
+                
+                <h3 class="text-xl font-bold mb-8 text-center">新能源触控事业部产品</h3>
+                <div class="product-grid">
+                    <div class="card bg-white p-6 rounded-lg shadow-md">
+                        <img src="https://picsum.photos/id/3/400/300" alt="投射式电容屏" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <h4 class="font-bold text-lg mb-2">投射式电容屏</h4>
+                        <p class="text-gray-600 text-sm">高精度触控，支持多点触控，适用于多种智能设备</p>
+                    </div>
+                    
+                    <div class="card bg-white p-6 rounded-lg shadow-md">
+                        <img src="https://picsum.photos/id/4/400/300" alt="全贴合TP+LCM" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <h4 class="font-bold text-lg mb-2">全贴合TP+LCM</h4>
+                        <p class="text-gray-600 text-sm">高透光率，画面更清晰，视觉效果更佳</p>
+                    </div>
+                    
+                    <div class="card bg-white p-6 rounded-lg shadow-md">
+                        <img src="https://picsum.photos/id/5/400/300" alt="非标定制触控屏" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <h4 class="font-bold text-lg mb-2">非标定制化触控屏</h4>
+                        <p class="text-gray-600 text-sm">根据客户需求定制，满足特殊场景应用</p>
+                    </div>
+                    
+                    <div class="card bg-white p-6 rounded-lg shadow-md">
+                        <img src="https://picsum.photos/id/6/400/300" alt="触控控制器" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <h4 class="font-bold text-lg mb-2">触控控制器</h4>
+                        <p class="text-gray-600 text-sm">高性能控制芯片，确保触控流畅稳定</p>
+                    </div>
+                </div>
+                
+                <h3 class="text-xl font-bold mb-8 text-center mt-16">LED显示屏事业部产品</h3>
+                <div class="product-grid">
+                    <div class="card bg-white p-6 rounded-lg shadow-md">
+                        <img src="https://picsum.photos/id/160/400/300" alt="室内全彩LED显示屏" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <h4 class="font-bold text-lg mb-2">室内全彩LED显示屏</h4>
+                        <p class="text-gray-600 text-sm">高清晰度，低功耗，适用于会议室、展厅等室内场景</p>
+                    </div>
+                    
+                    <div class="card bg-white p-6 rounded-lg shadow-md">
+                        <img src="https://picsum.photos/id/161/400/300" alt="户外全彩LED显示屏" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <h4 class="font-bold text-lg mb-2">户外全彩LED显示屏</h4>
+                        <p class="text-gray-600 text-sm">高亮度，抗紫外线，适合户外广告、城市亮化等场景</p>
+                    </div>
+                    
+                    <div class="card bg-white p-6 rounded-lg shadow-md">
+                        <img src="https://picsum.photos/id/162/400/300" alt="智慧灯杆屏" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <h4 class="font-bold text-lg mb-2">智慧灯杆屏</h4>
+                        <p class="text-gray-600 text-sm">集成于城市智慧灯杆，提供信息发布、广告展示功能</p>
+                    </div>
+                    
+                    <div class="card bg-white p-6 rounded-lg shadow-md">
+                        <img src="https://picsum.photos/id/163/400/300" alt="LED封装芯片" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <h4 class="font-bold text-lg mb-2">LED封装芯片</h4>
+                        <p class="text-gray-600 text-sm">自主研发封装技术，提升LED芯片性能与稳定性</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 企业理念 -->
+        <section id="philosophy" class="section py-20 bg-white">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4">企业理念</h2>
+                    <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6 text-gray-800">企业使命</h3>
+                        <p class="text-gray-700 mb-6 leading-relaxed">
+                            <span class="font-bold text-blue-600">创新驱动显示领域技术进步</span>
+                            <br>
+                            我们致力于通过持续的技术创新，推动触控与显示领域的技术进步，为客户提供更先进的产品与解决方案。
+                        </p>
+                        
+                        <h3 class="text-2xl font-bold mb-6 text-gray-800 mt-12">企业愿景</h3>
+                        <p class="text-gray-700 mb-6 leading-relaxed">
+                            <span class="font-bold text-blue-600">成为智慧城市与人机交换应用的建设主力军</span>
+                            <br>
+                            我们的目标是在智慧城市建设和人机交互应用领域发挥主导作用，为城市智能化发展贡献力量。
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6 text-gray-800">核心价值观</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-user-check text-blue-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-1">成就客户</h4>
+                                    <p class="text-gray-600">以客户需求为中心，致力于为客户创造价值</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-lightbulb text-blue-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-1">勇于创新</h4>
+                                    <p class="text-gray-600">鼓励创新思维，不断追求技术与管理的突破</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-handshake text-blue-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-1">诚信本分</h4>
+                                    <p class="text-gray-600">坚持诚信经营，恪守商业道德，本分做事</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-hands-helping text-blue-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-1">同谋同享</h4>
+                                    <p class="text-gray-600">与员工、合作伙伴共同谋划，共享发展成果</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 社会责任 -->
+        <section id="social" class="section py-20 bg-gray-50">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4">社会责任</h2>
+                    <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div class="bg-white p-8 rounded-xl shadow-md">
+                        <h3 class="text-xl font-bold mb-6 text-center text-blue-600">社会公益</h3>
+                        <ul class="space-y-4 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-heart text-red-500 mt-1 mr-3"></i>
+                                <span>每年不定期开展社会公益活动，关注弱势群体</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-graduation-cap text-red-500 mt-1 mr-3"></i>
+                                <span>支持教育事业，为贫困地区学校提供物资捐赠</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-hands-helping text-red-500 mt-1 mr-3"></i>
+                                <span>参与社区建设，组织志愿者服务活动</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white p-8 rounded-xl shadow-md">
+                        <h3 class="text-xl font-bold mb-6 text-center text-blue-600">环境责任</h3>
+                        <ul class="space-y-4 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-leaf text-green-500 mt-1 mr-3"></i>
+                                <span>每年定期开展环境行动，推动绿色生产方式</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-recycle text-green-500 mt-1 mr-3"></i>
+                                <span>推行环保措施，减少生产过程中的污染物排放</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-globe text-green-500 mt-1 mr-3"></i>
+                                <span>发布碳中和宣言，承诺5年内实现碳中和目标</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="mt-16 text-center">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-800">我们的承诺</h3>
+                    <p class="text-gray-700 max-w-2xl mx-auto mb-8">
+                        江苏宇联半导体有限公司不仅致力于技术创新和业务发展，更积极承担社会责任，
+                        推动可持续发展，为社会和环境贡献自己的力量。
+                    </p>
+                    <a href="#" class="btn-primary text-white font-medium py-3 px-8 rounded-full inline-block">
+                        期待与您携手同行 <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">UNIOA宇联</h3>
+                    <p class="text-gray-400 mb-4">
+                        江苏宇联半导体有限公司，致力于成为全球智慧触控屏&LED显示屏领域技术创新企业。
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-4">快速链接</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">关于我们</a></li>
+                        <li><a href="#products" class="text-gray-400 hover:text-white transition-colors">产品中心</a></li>
+                        <li><a href="#business" class="text-gray-400 hover:text-white transition-colors">业务板块</a></li>
+                        <li><a href="#philosophy" class="text-gray-400 hover:text-white transition-colors">企业理念</a></li>
+                        <li><a href="#social" class="text-gray-400 hover:text-white transition-colors">社会责任</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-4">联系我们</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2"></i>
+                            <span>江苏省扬州市高邮高新技术开发区</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-2"></i>
+                            <span>0514-XXXXXXX</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-2"></i>
+                            <span>info@yulian-semiconductor.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
+                <p>© 江苏宇联半导体有限公司</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 导航栏滚动效果
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('py-2');
+                nav.classList.remove('py-4');
+            } else {
+                nav.classList.remove('py-2');
+                nav.classList.add('py-4');
+            }
+        });
+        
+        // 移动端菜单切换
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                menuBtn.innerHTML = '<i class="fas fa-bars text-2xl"></i>';
+            } else {
+                menuBtn.innerHTML = '<i class="fas fa-times text-2xl"></i>';
+            }
+        });
+        
+        // 滚动显示动画
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 关闭移动端菜单
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        menuBtn.innerHTML = '<i class="fas fa-bars text-2xl"></i>';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+    
